@@ -1,4 +1,4 @@
 # Comp3111LEx
-HI, Student no: 20852057
-Name: LAU, Chi Hong
+# HI, Student no: 20852057
+# Name: LAU, Chi Hong
 ![img.png](../../../../img.png)![img_1.png](../../../../img_1.png)![img_2.png](../../../../img_2.png)
