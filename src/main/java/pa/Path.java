@@ -1,5 +1,8 @@
 package pa;
 
+import com.opencsv.CSVReader;
+
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,13 +21,31 @@ public class Path {
                 (col >= 0) && (col < mazeCol);
     }
 
+    static void readMazeFile(String file)
+    {
+        try {
+            FileReader filereader = new FileReader(file);
+            CSVReader csvReader = new CSVReader(filereader);
+            String[] nextRecord;
+            while ((nextRecord = csvReader.readNext()) != null) {
+                for (String cell : nextRecord) {
+                    System.out.print(cell + "\t");
+                }
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     static class QueueNode {
         Node node;
         List<Node> pastNode;
 
         public QueueNode(Node node, List<Node> pastNode) {
             this.node = node;
-            this.pastNode = pastNode;
+            this.pastNode = new ArrayList<Node>(pastNode);
+
         }
     }
 
@@ -74,6 +95,28 @@ public class Path {
 
     void displayPath()
     {
+        
+    }
 
+    public static void main(String[] args)
+    {
+        int[][] mat = new int[][] {
+                { 1, 0, 1, 1, 1, 1, 0, 1, 1, 1 },
+                { 1, 0, 1, 0, 1, 1, 1, 0, 1, 1 },
+                { 1, 1, 1, 0, 1, 1, 0, 1, 0, 1 },
+                { 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 },
+                { 1, 1, 1, 0, 1, 1, 1, 0, 1, 0 },
+                { 1, 0, 1, 1, 1, 1, 0, 1, 0, 0 },
+                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+                { 1, 0, 1, 1, 1, 1, 0, 1, 1, 1 },
+                { 1, 1, 0, 0, 0, 0, 1, 0, 0, 1 }
+        };
+
+        Node src = new Node(0,0);
+        Node dest = new Node(3,4);
+        Path path = new Path(src, dest, mat);
+        for (Node node : shortestPath)
+        {System.out.print(node+ "\t");}
     }
 }
+
