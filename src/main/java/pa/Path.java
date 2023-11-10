@@ -27,11 +27,28 @@ public class Path {
             FileReader filereader = new FileReader(file);
             CSVReader csvReader = new CSVReader(filereader);
             String[] nextRecord;
+            ArrayList<int[]> mazeList = new ArrayList<>();
             while ((nextRecord = csvReader.readNext()) != null) {
-                for (String cell : nextRecord) {
-                    System.out.print(cell + "\t");
+                int[] m = new int[nextRecord.length];
+                for (int i=0; i<nextRecord.length; i++) {
+                    m[i] =Integer.parseInt(nextRecord[i].replaceAll("\\s+",""));
                 }
+                mazeList.add(m);
             }
+            int[][] maze= new int[mazeList.size()][mazeList.get(0).length];
+            for (int i = 0; i < mazeList.size(); i++)
+            {
+                System.arraycopy(mazeList.get(i), 0, maze[i], 0, mazeList.get(i).length);
+            }
+
+//            for (int i = 0; i < maze.length; i++)
+//            {
+//                for (int j = 0; j < maze[i].length; j++)
+//                {
+//                    System.out.print(maze[i][j]+" ");
+//                }
+//                System.out.println("");
+//            }
         }
         catch (Exception e) {
             e.printStackTrace();

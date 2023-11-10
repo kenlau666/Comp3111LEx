@@ -1,6 +1,10 @@
 package pa;
 
+import com.opencsv.CSVReader;
 import org.junit.jupiter.api.Test;
+
+import java.io.FileReader;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,5 +29,10 @@ class PathTest {
         Path path = new Path(src, dest, mat);
         for (Node node : Path.shortestPath)
         {System.out.print("("+node.x+","+node.y+ ")\t");}
+    }
+    @Test
+    void testRead()
+    {
+        String file ="C:\\Users\\kenla\\IdeaProjects\\Comp3111LEx\\MazeMap_SPT.csv";
     }
 }
