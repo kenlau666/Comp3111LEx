@@ -8,6 +8,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+/**
+ * A class to find the shortest path
+ * @author <a href=mailto:chlaubc@connect.ust.hk>Me</a>
+ */
 public class Path {
     static Node[] shortestPath;
     static int mazeRow;
@@ -16,11 +20,19 @@ public class Path {
     static int[] rowNum = {-1, 0, 0, 1};
     static int[] colNum = {0, -1, 1, 0};
 
+    /**
+     * @param row the row number of maze
+     * @param col the col number of maze
+     * @return true if the movement is valid
+     */
     static boolean isValid(int row, int col) {
         return (row >= 0) && (row < mazeRow) &&
                 (col >= 0) && (col < mazeCol);
     }
 
+    /**
+     * @param file the csv file of maze data
+     */
     static void readMazeFile(String file)
     {
         try {
@@ -46,6 +58,9 @@ public class Path {
         }
     }
 
+    /**
+     * To store the queue in BFS
+     */
     static class QueueNode {
         Node node;
         List<Node> pastNode;
@@ -57,6 +72,11 @@ public class Path {
         }
     }
 
+    /**
+     * @param source the source point of the path
+     * @param destination the destination point of the path
+     * @param maze the maze data
+     */
     Path(Node source, Node destination, int[][] maze) {
         if (maze[source.x][source.y] == 0 || maze[destination.x][destination.y] == 0 || (source.x == destination.x && source.y == destination.y)) {
             shortestPath = null;
@@ -101,30 +121,13 @@ public class Path {
         }
     }
 
+    /**
+     * To show the shortest path in GUI
+     */
     void displayPath()
     {
         
     }
 
-    public static void main(String[] args)
-    {
-        int[][] mat = new int[][] {
-                { 1, 0, 1, 1, 1, 1, 0, 1, 1, 1 },
-                { 1, 0, 1, 0, 1, 1, 1, 0, 1, 1 },
-                { 1, 1, 1, 0, 1, 1, 0, 1, 0, 1 },
-                { 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 },
-                { 1, 1, 1, 0, 1, 1, 1, 0, 1, 0 },
-                { 1, 0, 1, 1, 1, 1, 0, 1, 0, 0 },
-                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-                { 1, 0, 1, 1, 1, 1, 0, 1, 1, 1 },
-                { 1, 1, 0, 0, 0, 0, 1, 0, 0, 1 }
-        };
-
-        Node src = new Node(0,0);
-        Node dest = new Node(3,4);
-        Path path = new Path(src, dest, mat);
-        for (Node node : shortestPath)
-        {System.out.print(node+ "\t");}
-    }
 }
 
